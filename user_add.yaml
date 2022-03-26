@@ -1,0 +1,43 @@
+---
+- name: Add users to remote hosts
+  hosts: epam
+  gather_facts: true
+  become: true
+    
+  tasks:
+  - name: Include parameters 
+    include_vars:
+      dir: vars
+
+  - name: Add several users to hostgroup from file and vault pass
+    user:
+      name: "{{ item.user }}"
+      comment: "{{ item.eml }}"
+      groups: users
+      update_password: on_create
+      password: "{{ item.passw | password_hash('sha512') }}"
+      append: yes
+      state: present
+    loop: "{{ secrety }}"
+    loop_control:
+      pause: 1
+    no_log: true
+
+
+
+
+  # - name: Delete user and his homedir
+  #   user:
+  #     name: Carol
+  #     state: absent
+  #     remove: yes   
+  
+  # - name: Get user info
+  #   getent:
+  #     database: passwd
+  #     key: Alice
+  # - debug:
+  #     var: ansible_facts.getent_passwd
+
+  
+

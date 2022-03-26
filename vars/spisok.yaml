@@ -1,0 +1,11 @@
+---
+secrety:
+  - user: Alice
+    eml: Alice_comp@comp.com
+    passw: "{{ Alice_pas }}"
+  - user: Bob
+    eml: Bob_comp@comp.com
+    passw: "{{ Bob_pas }}"
+  - user: Carol
+    eml: Carol_comp@comp.com
+    passw: "{{ Carol_pas }}"
